@@ -8,7 +8,7 @@
 
 import UIKit
 
-import AFNetworking
+import AFNetworking 
 import BDBOAuth1Manager
 
 // You can register for Yelp API keys here: http://www.yelp.com/developers/manage_api_keys
