@@ -1,10 +1,4 @@
-//
-//  BusinessCell.swift
-//  Yelp
-//
-//  Created by Hun Tun Zaw on 5/10/17.
-//  Copyright © 2017 Timothy Lee. All rights reserved.
-//
+
 
 import UIKit
 
