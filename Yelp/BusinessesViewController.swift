@@ -11,7 +11,8 @@ import UIKit
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var businesses: [Business]!
-    
+    var refresher: UIRefreshControl!
+    @IBOutlet weak var SearchOption: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -35,7 +36,12 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             
             }
         )
-    }
+        
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string:"Pull to Refresh")
+        refresher.addTarget(self, action: #selector(BusinessesViewController.populate), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
+       }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
