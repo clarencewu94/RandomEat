@@ -30,15 +30,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             
             }
         )
-        self.loadData()
-        
-        }
-    func loadData(){
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string:"Pull to Refresh")
-        refresher.addTarget(self, action: #selector(BusinessesViewController.tableView(_:cellForRowAt:)), for: UIControlEvents.valueChanged)
+        refresher.addTarget(self, action: #selector(getter: BusinessesViewController.tableView), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
-
+        refresher.endRefreshing()
+        self.tableView.reloadData()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,10 +52,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
         let yelpRan = Int(arc4random_uniform(19) + 1)
         cell.business = businesses[yelpRan]
+        refresher.endRefreshing()
         return cell;
     }
- 
- 
+
  
     
    
