@@ -1,10 +1,4 @@
-//
-//  BusinessesViewController.swift
-//  Yelp
-//
-//  Created by Timothy Lee on 4/23/15.
-//  Copyright (c) 2015 Timothy Lee. All rights reserved.
-//
+
 
 import UIKit
 
@@ -39,7 +33,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
-            return businesses!.count
+            //return businesses!.count
+            return 1
         }else{
             return 0
         }
@@ -47,7 +42,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
-        cell.business = businesses[indexPath.row]
+        let yelpRan = Int(arc4random_uniform(19) + 1)
+        cell.business = businesses[yelpRan]
         return cell;
     }
     

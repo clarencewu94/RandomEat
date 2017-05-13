@@ -59,13 +59,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         //let location = locations.last as! CLLocation
         
-        let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        //let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
         
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        let span = MKCoordinateSpanMake(0.5, 0.5)
+        
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
         
         self.theMap.setRegion(region, animated: true)
         
     }
+    
     
     
 }
