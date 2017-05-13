@@ -30,12 +30,16 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             
             }
         )
+        self.loadData()
         
+        }
+    func loadData(){
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string:"Pull to Refresh")
-        refresher.addTarget(self, action: #selector(BusinessesViewController.populate), for: UIControlEvents.valueChanged)
+        refresher.addTarget(self, action: #selector(BusinessesViewController.tableView(_:cellForRowAt:)), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
-       }
+
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
@@ -52,7 +56,11 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.business = businesses[yelpRan]
         return cell;
     }
+ 
+ 
+ 
     
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
