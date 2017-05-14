@@ -53,17 +53,54 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         print(location.altitude)
         print(location.speed)
         map.showsUserLocation = true
+        
+       
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        
+        /*let location = locations[0]
+        let LocationCorrdinate = CLLocationCoordinate2D(LocationCoordinate.coordinate.latitude, LocationCoordinate.coordinate.longitude)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = "Store"
+        annotation.subtitle = "Location Of Store"
+        
+        map.addAnnotation(annotation)*/
     }
     
+}
     
+ /*   class PinAnnotation: NSObject, MKAnnotation{
+        var coordinate: CLLocationCoordinate2D
+        var title: String?
+        var subtitle:String?
+        
+        init(coordinate:CLLocationCoordinate2D, title:String, subtitle:String){
+            self.coordinate = coordinate
+            self.title = title
+            self.subtitle = subtitle
+        }
+        
+        class func createViewAnnotationForMap(mapView:MKMapView, annotation:MKAnnotation)->MKAnnotation{
+            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "PinAnnotation"){
+                return annotationView as! MKAnnotation
+            }
+            else{
+                let returnAnnotationView:MKPinAnnotationView=MKPinAnnotationView(annotation:annotation, reuseIdentifier:"PinAnnotation")
+                returnAnnotationView.animatesDrop = true
+                returnAnnotationView.canShowCallout = true
+                return returnAnnotationView
+            }
+        }
+        
+    }*/
+
     
    /* var locationManager: CLLocationManager!
     
@@ -98,7 +135,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-}
 
 
 
