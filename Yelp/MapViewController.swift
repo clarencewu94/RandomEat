@@ -50,9 +50,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
         self.map.setRegion(region, animated: true)
         
-        print(location.altitude)
-        print(location.speed)
+        //print(location.altitude)
+        //print(location.speed)
         map.showsUserLocation = true
+        manager.stopUpdatingLocation();
+
+
         
        
     }

@@ -61,6 +61,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
         let yelpRan = Int(arc4random_uniform(19) + 1)
         cell.business = businesses[yelpRan]
+        let currentName = cell.business.name!
+        let currentAddress = cell.business.address!
+        print (currentName)
+        print (currentAddress)
         return cell;
     }
 
