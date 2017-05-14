@@ -107,6 +107,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="RandomEats" id="COp-ll-Sd7">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="bJZ-eZ-stM">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6tA-fk-gMc">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="Refreshment:" destination="2xI-yr-O5N" eventType="touchUpInside" id="56E-no-9rf"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="gVl-vJ-Ed8"/>
                     </navigationItem>
                     <connections>

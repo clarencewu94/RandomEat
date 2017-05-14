@@ -9,6 +9,15 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var SearchOption: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func Refreshment(_ sender: UIButton) {
+        self.tableView.reloadData()
+
+    }
+   
+    var button: UIButton = UIButton()
+ 
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,16 +39,16 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             
             }
         )
-        refresher = UIRefreshControl()
+        
+        /*refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string:"Pull to Refresh")
-        refresher.addTarget(self, action: #selector(getter: BusinessesViewController.tableView), for: UIControlEvents.valueChanged)
+        refresher.addTarget(self, action: #selector(getter :businesses), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
         refresher.endRefreshing()
         self.tableView.reloadData()
-        
+        viewDidLoad()*/
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
             //return businesses!.count
             return 1
@@ -52,7 +61,6 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
         let yelpRan = Int(arc4random_uniform(19) + 1)
         cell.business = businesses[yelpRan]
-        refresher.endRefreshing()
         return cell;
     }
 
