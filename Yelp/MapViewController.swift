@@ -34,15 +34,42 @@ import CoreLocation
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
-    @IBOutlet weak var theMap: MKMapView!
+    
+    //Making the Map go directly to the Resturant location
+    @IBOutlet weak var map: MKMapView!
+    
+    let manager = CLLocationManager()
+    
     let regionRadius: CLLocationDistance = 1000
     
-    
-    var locationManager: CLLocationManager!
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            let location = locations[0]
+        
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        self.map.setRegion(region, animated: true)
+        
+        print(location.altitude)
+        print(location.speed)
+        map.showsUserLocation = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+    }
+    
+    
+    
+   /* var locationManager: CLLocationManager!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
         if (CLLocationManager.locationServicesEnabled())
         {
             locationManager = CLLocationManager()
@@ -67,7 +94,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         self.theMap.setRegion(region, animated: true)
         
-    }
+    }*/
     
     
     
