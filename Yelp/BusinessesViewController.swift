@@ -4,6 +4,7 @@ import UIKit
 
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+ 
     var businesses: [Business]!
     var refresher: UIRefreshControl!
     @IBOutlet weak var SearchOption: UIBarButtonItem!
@@ -51,7 +52,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
             //return businesses!.count
-            return 1
+            return 3
         }else{
             return 0
         }
@@ -63,7 +64,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.business = businesses[yelpRan]
         return cell;
     }
-
+   
  
     
    
