@@ -2,8 +2,8 @@
 //  BusinessesViewController.swift
 //  Yelp
 //
-//  Created by Timothy Lee on 4/23/15.
-//  Copyright (c) 2015 Timothy Lee. All rights reserved.
+//  Created by Brandon Nguyen on 4/23/17.
+//  Copyright (c) 2017 Brandon Nguyen, Clarence Wu, Hun Tun Zaw. All rights reserved.
 //
 
 import UIKit
@@ -12,14 +12,14 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var businesses: [Business]!
     
-
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func RefreshButton(_ sender: Any) {
+    @IBAction func RefreshButton(_ sender: UIButton) {
         self.tableView.reloadData()
     }
+    
     var button: UIButton = UIButton()
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,7 +46,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
             //return businesses!.count
-            return 1
+            return 3
         }else{
             return 0
         }
@@ -69,9 +69,20 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let navigationController = segue.destination as! UINavigationController
-        let categoryViewController = navigationController.topViewController as! CategoryViewController
-        categoryViewController.delegate = self
+        super.prepare(for: segue, sender: sender)
+        if segue.destination is UINavigationController {
+            let navigationController = segue.destination as! UINavigationController
+            if navigationController.viewControllers[0] is CategoryViewController{
+                let categoryViewController = navigationController.topViewController as! CategoryViewController
+                categoryViewController.delegate = self
+            }
+            //let categoryViewController = navigationController.topViewController as! CategoryViewController
+          //  categoryViewController.delegate = self
+
+        }
+        //let navigationController = segue.destination as! UINavigationController
+       // let categoryViewController = navigationController.topViewController as! CategoryViewController
+        //categoryViewController.delegate = self
     }
     
     func categoryViewController(categoryViewController: CategoryViewController, didUpdateFilters filters: [String : AnyObject]) {
