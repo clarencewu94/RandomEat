@@ -46,7 +46,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
             //return businesses!.count
-            return 3
+            return 1
         }else{
             return 0
         }
@@ -54,7 +54,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
-        let yelpRan = Int(arc4random_uniform(19) + 1)
+        //let yelpRan = Int(arc4random_uniform(20) + 0)
+        let yelpRan = Int(arc4random_uniform(UInt32(businesses.count)))
         cell.business = businesses[yelpRan]
         let currentName = cell.business.name!
         let currentAddress = cell.business.address!

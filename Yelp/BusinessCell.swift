@@ -32,7 +32,10 @@ class BusinessCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         restaurantImageView.layer.cornerRadius = 3
-        restaurantImageView.clipsToBounds = true 
+        restaurantImageView.clipsToBounds = true
+        //let image = UIImage(named: "ErrorImage")
+        //restaurantImageView.image = UIImage(named: "ErrorImage")
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
