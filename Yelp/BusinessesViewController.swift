@@ -1,18 +1,22 @@
-//
-//  BusinessesViewController.swift
-//  Yelp
-//
-//  Created by Timothy Lee on 4/23/15.
-//  Copyright (c) 2015 Timothy Lee. All rights reserved.
-//
+
 
 import UIKit
 
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CategoryViewControllerDelegate {
     
     var businesses: [Business]!
-    
+    var refresher: UIRefreshControl!
+    @IBOutlet weak var SearchOption: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBAction func Refreshment(_ sender: UIButton) {
+        self.tableView.reloadData()
+
+    }
+   
+    var button: UIButton = UIButton()
+ 
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +39,19 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             
             }
         )
+        
+        /*refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string:"Pull to Refresh")
+        refresher.addTarget(self, action: #selector(getter :businesses), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
+        refresher.endRefreshing()
+        self.tableView.reloadData()
+        viewDidLoad()*/
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
-            return businesses!.count
+            //return businesses!.count
+            return 1
         }else{
             return 0
         }
@@ -47,10 +59,18 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
-        cell.business = businesses[indexPath.row]
+        let yelpRan = Int(arc4random_uniform(19) + 1)
+        cell.business = businesses[yelpRan]
+        let currentName = cell.business.name!
+        let currentAddress = cell.business.address!
+        print (currentName)
+        print (currentAddress)
         return cell;
     }
+
+ 
     
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

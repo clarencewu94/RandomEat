@@ -34,15 +34,82 @@ import CoreLocation
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
-    @IBOutlet weak var theMap: MKMapView!
+    
+    //Making the Map go directly to the Resturant location
+    @IBOutlet weak var map: MKMapView!
+    
+    let manager = CLLocationManager()
+    
     let regionRadius: CLLocationDistance = 1000
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            let location = locations[0]
+
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        self.map.setRegion(region, animated: true)
+        
+        //print(location.altitude)
+        //print(location.speed)
+        map.showsUserLocation = true
+        manager.stopUpdatingLocation();
+
+
+        
+       
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        
+        /*let location = locations[0]
+        let LocationCorrdinate = CLLocationCoordinate2D(LocationCoordinate.coordinate.latitude, LocationCoordinate.coordinate.longitude)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = "Store"
+        annotation.subtitle = "Location Of Store"
+        
+        map.addAnnotation(annotation)*/
+    }
     
-    var locationManager: CLLocationManager!
+}
+    
+ /*   class PinAnnotation: NSObject, MKAnnotation{
+        var coordinate: CLLocationCoordinate2D
+        var title: String?
+        var subtitle:String?
+        
+        init(coordinate:CLLocationCoordinate2D, title:String, subtitle:String){
+            self.coordinate = coordinate
+            self.title = title
+            self.subtitle = subtitle
+        }
+        
+        class func createViewAnnotationForMap(mapView:MKMapView, annotation:MKAnnotation)->MKAnnotation{
+            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "PinAnnotation"){
+                return annotationView as! MKAnnotation
+            }
+            else{
+                let returnAnnotationView:MKPinAnnotationView=MKPinAnnotationView(annotation:annotation, reuseIdentifier:"PinAnnotation")
+                returnAnnotationView.animatesDrop = true
+                returnAnnotationView.canShowCallout = true
+                return returnAnnotationView
+            }
+        }
+        
+    }*/
+
+    
+   /* var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         if (CLLocationManager.locationServicesEnabled())
         {
             locationManager = CLLocationManager()
@@ -59,16 +126,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         //let location = locations.last as! CLLocation
         
-        let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        //let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
         
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        let span = MKCoordinateSpanMake(0.5, 0.5)
+        
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
         
         self.theMap.setRegion(region, animated: true)
         
-    }
+    }*/
     
     
-}
+    
 
 
 
