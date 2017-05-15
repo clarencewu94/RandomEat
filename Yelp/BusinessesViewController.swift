@@ -67,6 +67,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         print (currentName)
         print (currentAddress)
         return cell;
+    
+       
     }
    
  
