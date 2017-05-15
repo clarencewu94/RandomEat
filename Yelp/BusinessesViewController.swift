@@ -12,8 +12,14 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var businesses: [Business]!
     
+
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func RefreshButton(_ sender: Any) {
+        self.tableView.reloadData()
+    }
+    var button: UIButton = UIButton()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
