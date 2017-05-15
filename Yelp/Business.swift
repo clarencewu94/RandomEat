@@ -18,8 +18,7 @@ class Business: NSObject {
         if imageURLString != nil {
             imageURL = URL(string: imageURLString!)!
         } else {
-            //imageURL = nil
-            imageURL.sd_setImage(with: url, placeholderImage: "ErrorImage.jpg");
+            imageURL = nil
 
         }
         
