@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CategoryViewControllerDelegate {
     
     var businesses: [Business]!
     
@@ -54,6 +54,24 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navigationController = segue.destination as! UINavigationController
+        let categoryViewController = navigationController.topViewController as! CategoryViewController
+        categoryViewController.delegate = self
+    }
+    
+    func categoryViewController(categoryViewController: CategoryViewController, didUpdateFilters filters: [String : AnyObject]) {
+        
+        let categories = filters["categories"] as? [String]
+        
+        Business.searchWithTerm(term: "Restaurants", sort: nil, categories: categories, deals: nil)
+        { (businesses: [Business]!, error: Error!) -> Void in
+                self.businesses = businesses
+                self.tableView.reloadData()
+        }
+        //Business.searchWithTerm(term: "Restaurants", sort: nil, categories: categories, deals: nil, completion: ([Business]?, Error?) -> Void)
     }
     
     
