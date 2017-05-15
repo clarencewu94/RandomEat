@@ -3,7 +3,7 @@
 //  Yelp
 //
 //  Created by Hun Tun Zaw on 5/14/17.
-//  Copyright © 2017 Timothy Lee. All rights reserved.
+//  Copyright © 2017 Brandon Nguyen, Clarence Wu, Hun Tun Zaw. All rights reserved.
 //
 
 import UIKit
@@ -82,7 +82,11 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             ["name": "Traditional American:", "code": "tradamerican"],
             ["name": "Asian Fusion", "code": "asianfusion"],
             ["name": "Barbeque", "code": "bbq"],
-            ["name": "Asian Fusion", "code": "asianfusion"]]
+            ["name": "African", "code": "african"],
+            ["name": "Breakfast & Brunch", "code": "breakfast_brunch"],
+            ["name": "Buffets", "code": "buffets"],
+            ["name": "Burgers", "code": "burgers"],
+            ["name": "Cafes", "code": "cafes"]]
     }
 
 }

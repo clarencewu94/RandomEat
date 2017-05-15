@@ -2,8 +2,8 @@
 //  CategoryCell.swift
 //  Yelp
 //
-//  Created by Hun Tun Zaw on 5/14/17.
-//  Copyright © 2017 Timothy Lee. All rights reserved.
+//  Created by Hun Tun Zaw on 5/10/17.
+//  Copyright © 2017 Brandon Nguyen, Clarence Wu, Hun Tun Zaw. All rights reserved.
 //
 
 import UIKit
