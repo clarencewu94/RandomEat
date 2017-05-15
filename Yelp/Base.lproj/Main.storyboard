@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WJZ-OQ-tYM">
-=======
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WJZ-OQ-tYM">
->>>>>>> c2865591ffd600f8f8d6119ea6ff521aa29f226c
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-<<<<<<< HEAD
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-=======
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
->>>>>>> c2865591ffd600f8f8d6119ea6ff521aa29f226c
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -38,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="134"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UDQ-MF-SeE" id="Tdr-gZ-M9P">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="133"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="133.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ysh-KD-RDM">
@@ -116,28 +108,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="RandomEats" id="COp-ll-Sd7">
-<<<<<<< HEAD
                         <barButtonItem key="leftBarButtonItem" title="Filter" id="qOd-KA-Uch">
                             <connections>
                                 <segue destination="mam-Ox-5Zb" kind="presentation" id="cDG-9T-JA7"/>
                             </connections>
                         </barButtonItem>
-=======
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="bJZ-eZ-stM">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6tA-fk-gMc">
-                                <rect key="frame" x="16" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Refresh"/>
-                                <connections>
-                                    <action selector="Refreshment:" destination="2xI-yr-O5N" eventType="touchUpInside" id="56E-no-9rf"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="gVl-vJ-Ed8"/>
->>>>>>> c2865591ffd600f8f8d6119ea6ff521aa29f226c
                     </navigationItem>
                     <connections>
-                        <outlet property="SearchOption" destination="gVl-vJ-Ed8" id="7rG-VM-fud"/>
                         <outlet property="tableView" destination="x42-nd-A1R" id="tbJ-bL-kf1"/>
                     </connections>
                 </viewController>
@@ -240,9 +217,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="map" destination="q6v-tq-AgC" id="mOp-im-EZF"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JvI-6l-2OH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

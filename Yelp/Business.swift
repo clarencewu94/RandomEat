@@ -38,7 +38,6 @@ class Business: NSObject {
             }
         }
         self.address = address
-        print (address)
         
         let categoriesArray = dictionary["categories"] as? [[String]]
         if categoriesArray != nil {
