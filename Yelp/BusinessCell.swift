@@ -1,6 +1,7 @@
 
 
 import UIKit
+import AFNetworking
 
 class BusinessCell: UITableViewCell {
 
@@ -16,15 +17,20 @@ class BusinessCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     
-    var business: Business!{
+    var business: Business?{
         didSet{
-            restaurantLabel.text = business.name
-            //restaurantImageView?.setImageWith(business.imageURL!)
-            ratingImageView.setImageWith(business.ratingImageURL!)
-            distanceLabel.text = business.distance
-            ratingLabel.text = "\(business.reviewCount!) Reviews"
-            addressLabel.text = business.address
-            categoryLabel.text = business.categories
+            self.restaurantLabel.text = business?.name
+            //restaurantImageView?.setImageWith(business?.imageURL!)
+            self.ratingImageView.setImageWith((business?.ratingImageURL!)!)
+            self.distanceLabel.text = business?.distance
+            //self.ratingLabel.text = "business?.reviewCount! Reviews"
+            if let ratingLabel = business?.reviewCount {
+                self.ratingLabel.text = ratingLabel.stringValue + " reviews"
+            } else {
+                self.ratingLabel.text = "0 reviews"
+            }
+            self.addressLabel.text = business?.address
+            self.categoryLabel.text = business?.categories
             self.restaurantImageView.image = nil;
             if let url = business?.imageURL {
                 self.restaurantImageView.setImageWith(url);

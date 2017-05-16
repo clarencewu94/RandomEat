@@ -12,8 +12,6 @@ import CoreLocation
 
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CategoryViewControllerDelegate {
     
-    var businesses: [Business]!
-    var nameToBusiness  = [String : Business] ()
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +26,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var button: UIButton = UIButton()
     
+    
+    var businesses: [Business]!
+    var nameToBusiness  = [String : Business] ()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +37,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         tableView.delegate = self
         tableView.dataSource = self
-        mapView.delegate = self
+        
+        self.mapView.delegate = self
 
         
         Business.searchWithTerm(term: "Restaurants", completion: { (businesses: [Business]?, error: Error?) -> Void in
@@ -46,12 +49,12 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             self.tableView.reloadData()
             if let businesses = businesses {
                 for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
+                    //print(business.name!)
+                    //print(business.address!)
                 }
             }
             
-            }
+        }
         )
     }
     
@@ -64,7 +67,9 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         var coordinate = CLLocationCoordinate2DMake(37.0,-122.0);
         var annotation = MKPointAnnotation()
         self.mapView.removeAnnotations(self.mapView.annotations);
+        print("Before if statement")
         if let businesses = self.businesses {
+            print ("if statement 1 works")
             for business in businesses {
                 if let lat = business.lat,
                     let lon = business.lon {
@@ -74,6 +79,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                     annotation.title = business.name
                     annotation.subtitle = business.address
                     
+                    print ("inside if statement")
+
                     // var placemark = MKPlacemark(coordinate: coordinate , addressDictionary: nil);
                     // placemark.title = business.name
                     self.nameToBusiness[annotation.title! + annotation.subtitle!] = business
@@ -83,14 +90,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             
             self.mapView.selectAnnotation(annotation, animated: true);
-            let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01,0.01)
-            let  viewRegion:MKCoordinateRegion =
-                MKCoordinateRegionMake(coordinate, span);
-            self.mapView.setRegion(viewRegion, animated: true)
-            
+            let  viewRegion =
+                MKCoordinateRegionMakeWithDistance(coordinate, 2000, 2000);
+            let adjustedRegion = self.mapView.regionThatFits(viewRegion)
+            self.mapView.setRegion(adjustedRegion, animated: true)
         }
     }
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
@@ -106,10 +112,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         //let yelpRan = Int(arc4random_uniform(20) + 0)
         let yelpRan = Int(arc4random_uniform(UInt32(businesses.count)))
         cell.business = businesses[yelpRan]
-        let currentName = cell.business.name!
-        let currentAddress = cell.business.address!
-        print (currentName)
-        print (currentAddress)
+        let currentName = cell.business?.name!
+        let currentAddress = cell.business?.address!
+        //print (currentName)
+        //print (currentAddress)
         return cell;
     }
     
@@ -151,21 +157,21 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
 //        }
 //        sender.title = sender.title == "List" ? "Map" : "List"
 //    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "loc")
-        
-        annotationView.canShowCallout = true
-        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        
-        // annotationView.image = UIImage(named: "phone.png")
-        return annotationView
-    }
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        self.performSegue(withIdentifier: "showDetailSegue", sender: view)
-    }
+//    
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "loc")
+//        
+//        annotationView.canShowCallout = true
+//        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+//        
+//        // annotationView.image = UIImage(named: "phone.png")
+//        return annotationView
+//    }
+//
+//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//        
+//        self.performSegue(withIdentifier: "showDetailSegue", sender: view)
+//    }
     
     
 
