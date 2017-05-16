@@ -24,11 +24,12 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: BusinessCell)
-        
+        self.tableView.backgroundColor = UIColor.clear
+
         tableView.delegate = self
         tableView.dataSource = self
-        
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+        self.tableView.delegate = self
+        Business.searchWithTerm(term: "Restaurants", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
             self.tableView.reloadData()
@@ -42,11 +43,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         )
     }
-    
+     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
             //return businesses!.count
-            return 3
+            return 1
         }else{
             return 0
         }
@@ -54,7 +57,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
-        let yelpRan = Int(arc4random_uniform(19) + 1)
+        //let yelpRan = Int(arc4random_uniform(20) + 0)
+        let yelpRan = Int(arc4random_uniform(UInt32(businesses.count)))
         cell.business = businesses[yelpRan]
         let currentName = cell.business.name!
         let currentAddress = cell.business.address!
@@ -62,13 +66,26 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         print (currentAddress)
         return cell;
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+     func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.destination is MapViewController{
+            let NextSegue = segue.destination as! MapViewController
+            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
+                //let yelpRan = Int(arc4random_uniform(20) + 0)
+                let yelpRan = Int(arc4random_uniform(UInt32(businesses.count)))
+                cell.business = businesses[yelpRan]
+                let currentName = cell.business.name!
+                let currentAddress = cell.business.address!
+                print (currentName)
+                print (currentAddress)
+                return cell;
+            }
+
+    }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if segue.destination is UINavigationController {
             let navigationController = segue.destination as! UINavigationController

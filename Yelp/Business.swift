@@ -19,6 +19,8 @@ class Business: NSObject {
             imageURL = URL(string: imageURLString!)!
         } else {
             imageURL = nil
+            //imageURL.sd_setImage(with: url, placeholderImage: "ErrorImage.jpg");
+
         }
         
         let location = dictionary["location"] as? NSDictionary
