@@ -1,7 +1,6 @@
 
 
 import UIKit
-import AFNetworking
 
 class BusinessCell: UITableViewCell {
 
@@ -35,32 +34,33 @@ class BusinessCell: UITableViewCell {
             if let url = business?.imageURL {
                 self.restaurantImageView.setImageWith(url);
                 self.restaurantImageView.setImageWith(URLRequest(url: url), placeholderImage: nil,
-                                                 success: { (urlRequest, imageResponse, image) in
-                                                    if imageResponse != nil {
-                                                        
-                                                        self.restaurantImageView?.alpha = 0.0
-                                                        self.restaurantImageView?.image = image
-                                                        self.restaurantImageView?.contentMode = UIViewContentMode.scaleToFill
-                                                        UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                                                            self.restaurantImageView?.alpha = 1.0
-                                                        })
-                                                    } else {
-                                                        
-                                                        self.restaurantImageView?.image = image
-                                                        self.restaurantImageView?.contentMode = UIViewContentMode.scaleToFill
-                                                    }
+                                                      success: { (urlRequest, imageResponse, image) in
+                                                        if imageResponse != nil {
+                                                            
+                                                            self.restaurantImageView?.alpha = 0.0
+                                                            self.restaurantImageView?.image = image
+                                                            self.restaurantImageView?.contentMode = UIViewContentMode.scaleToFill
+                                                            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                                                                self.restaurantImageView?.alpha = 1.0
+                                                            })
+                                                        } else {
+                                                            
+                                                            self.restaurantImageView?.image = image
+                                                            self.restaurantImageView?.contentMode = UIViewContentMode.scaleToFill
+                                                        }
                 }, failure: { (urlRequest, urlResponse, error) in
                     
                 })
-
+                
+            }
         }
     }
-    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        restaurantImageView?.layer.cornerRadius = 3
-        restaurantImageView?.clipsToBounds = true
+        restaurantImageView.layer.cornerRadius = 3
+        restaurantImageView.clipsToBounds = true
         //let image = UIImage(named: "ErrorImage")
         //restaurantImageView.image = UIImage(named: "ErrorImage")
 

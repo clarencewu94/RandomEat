@@ -10,13 +10,9 @@ class Business: NSObject {
     let distance: String?
     let ratingImageURL: URL?
     let reviewCount: NSNumber?
-    let snippetText : String?
-
-    var displayPhone : String?
     
-    var lat : Double?
-    var lon : Double?
-    
+    var lat: Double?
+    var lon: Double?
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
         
@@ -25,11 +21,8 @@ class Business: NSObject {
             imageURL = URL(string: imageURLString!)!
         } else {
             imageURL = nil
-<<<<<<< HEAD
-=======
+            //imageURL.sd_setImage(with: url, placeholderImage: "ErrorImage.jpg");
 
-
->>>>>>> 7d824611f8c264d793d361bd2cb20726a457fb31
         }
         
         let location = dictionary["location"] as? NSDictionary
@@ -47,10 +40,11 @@ class Business: NSObject {
                 }
                 address += neighborhoods![0] as! String
             }
-            if let coordinate = location!["coordinate"] as? [String : Double] {
+            if let coordinate = location!["coordinate"] as? [String: Double]{
                 lat = coordinate["latitude"]
                 lon = coordinate["longitude"]
             }
+                
             
         }
         self.address = address
@@ -83,9 +77,6 @@ class Business: NSObject {
         }
         
         reviewCount = dictionary["review_count"] as? NSNumber
-        
-        snippetText = dictionary["snippet_text"] as? String
-        displayPhone = dictionary["display_phone"] as? String
     }
     
     class func businesses(array: [NSDictionary]) -> [Business] {
