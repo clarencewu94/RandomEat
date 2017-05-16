@@ -22,10 +22,7 @@ class Business: NSObject {
             imageURL = URL(string: imageURLString!)!
         } else {
             imageURL = nil
-<<<<<<< HEAD
-            //imageURL.sd_setImage(with: url, placeholderImage: "ErrorImage.jpg");
-=======
->>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
+
 
         }
         

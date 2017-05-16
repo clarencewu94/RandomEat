@@ -58,34 +58,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 528b07ce488c679c8839b60aeb862f3f9c3efaef
         let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
         let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
         self.map.setRegion(region, animated: true)
         
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 528b07ce488c679c8839b60aeb862f3f9c3efaef
         print(location.altitude)
         print(location.speed)
         map.showsUserLocation = true
         manager.stopUpdatingLocation();
-<<<<<<< HEAD
 
-=======
-        
-<<<<<<< HEAD
-      
-=======
->>>>>>> 528b07ce488c679c8839b60aeb862f3f9c3efaef
->>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
     }
    
     override func viewDidLoad() {

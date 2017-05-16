@@ -37,13 +37,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
 
         tableView.delegate = self
         tableView.dataSource = self
-<<<<<<< HEAD
         self.tableView.delegate = self
-=======
         mapView.delegate = self
 
         
->>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
         Business.searchWithTerm(term: "Restaurants", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.reloadListAndMapViews()
@@ -60,11 +57,9 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         )
     }
-<<<<<<< HEAD
      func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
     }
-=======
     
     func reloadListAndMapViews() {
         
@@ -103,7 +98,6 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     
->>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
             //return businesses!.count
@@ -125,10 +119,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell;
     
     }
-<<<<<<< HEAD
    
  
-=======
     
     
     @IBAction func mapButtonClicked(_ sender: UIButton) {
@@ -183,7 +175,6 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.performSegue(withIdentifier: "showDetailSegue", sender: view)
     }
-<<<<<<< HEAD
      func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.destination is MapViewController{
             let NextSegue = segue.destination as! MapViewController
@@ -200,16 +191,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             }
 
     }
-=======
-    
+    }
     
 
->>>>>>> 528b07ce488c679c8839b60aeb862f3f9c3efaef
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
->>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
     }
     
        
@@ -241,6 +229,5 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         //Business.searchWithTerm(term: "Restaurants", sort: nil, categories: categories, deals: nil, completion: ([Business]?, Error?) -> Void)
     }
-    
-    
-}
+    }
+
