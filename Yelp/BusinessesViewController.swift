@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CategoryViewControllerDelegate {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CategoryViewControllerDelegate {
     
+ 
     var businesses: [Business]!
+    var nameToBusiness  = [String : Business] ()
+
     
     @IBOutlet weak var tableView: UITableView!
+    
+
+    @IBOutlet weak var mapView: MKMapView!
+
     
     @IBAction func RefreshButton(_ sender: UIButton) {
         self.tableView.reloadData()
@@ -28,9 +37,17 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
 
         tableView.delegate = self
         tableView.dataSource = self
+<<<<<<< HEAD
         self.tableView.delegate = self
+=======
+        mapView.delegate = self
+
+        
+>>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
         Business.searchWithTerm(term: "Restaurants", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
+            self.reloadListAndMapViews()
+
             self.businesses = businesses
             self.tableView.reloadData()
             if let businesses = businesses {
@@ -43,13 +60,54 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         )
     }
+<<<<<<< HEAD
      func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
     }
+=======
+    
+    func reloadListAndMapViews() {
+        
+        // reload table view
+        self.tableView.reloadData()
+        
+        // add annotations to map view
+        var coordinate = CLLocationCoordinate2DMake(37.0,-122.0);
+        var annotation = MKPointAnnotation()
+        self.mapView.removeAnnotations(self.mapView.annotations);
+        if let businesses = self.businesses {
+            for business in businesses {
+                if let lat = business.lat,
+                    let lon = business.lon {
+                    coordinate = CLLocationCoordinate2DMake(lat, lon)
+                    annotation = MKPointAnnotation()
+                    annotation.coordinate = coordinate
+                    annotation.title = business.name
+                    annotation.subtitle = business.address
+                    
+                    // var placemark = MKPlacemark(coordinate: coordinate , addressDictionary: nil);
+                    // placemark.title = business.name
+                    self.nameToBusiness[annotation.title! + annotation.subtitle!] = business
+                    self.mapView.addAnnotation(annotation)
+                    
+                }
+            }
+            
+            self.mapView.selectAnnotation(annotation, animated: true);
+            let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01,0.01)
+            let  viewRegion:MKCoordinateRegion =
+                MKCoordinateRegionMake(coordinate, span);
+            self.mapView.setRegion(viewRegion, animated: true)
+            
+        }
+    }
+
+    
+>>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
             //return businesses!.count
-            return 1
+            return 3
         }else{
             return 0
         }
@@ -65,7 +123,67 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         print (currentName)
         print (currentAddress)
         return cell;
+    
     }
+<<<<<<< HEAD
+   
+ 
+=======
+    
+    
+    @IBAction func mapButtonClicked(_ sender: UIButton) {
+
+            let transitionParams :  UIViewAnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
+            UIView.transition(from: self.tableView,
+                              to: self.mapView,
+                              duration: 0.5,
+                              options: transitionParams,
+                              completion: nil);
+//         else {
+//            let transitionParams :  UIViewAnimationOptions = [.transitionFlipFromLeft, .showHideTransitionViews]
+//            UIView.transition(from: self.mapView,
+//                              to: self.tableView,
+//                              duration: 0.5,
+//                              options: transitionParams,
+//                              completion: nil);
+//        }
+     //   sender.title = sender.title == "List" ? "Map" : "List"
+    }
+//    @IBAction func mapButtonBarClicked(_ sender: UIBarButtonItem) {
+//        
+//        if sender.title == "Map" {
+//            let transitionParams :  UIViewAnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
+//            UIView.transition(from: self.tableView,
+//                              to: self.mapView,
+//                              duration: 0.5,
+//                              options: transitionParams,
+//                              completion: nil);
+//        } else {
+//            let transitionParams :  UIViewAnimationOptions = [.transitionFlipFromLeft, .showHideTransitionViews]
+//            UIView.transition(from: self.mapView,
+//                              to: self.tableView,
+//                              duration: 0.5,
+//                              options: transitionParams,
+//                              completion: nil);
+//        }
+//        sender.title = sender.title == "List" ? "Map" : "List"
+//    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "loc")
+        
+        annotationView.canShowCallout = true
+        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        
+        // annotationView.image = UIImage(named: "phone.png")
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        self.performSegue(withIdentifier: "showDetailSegue", sender: view)
+    }
+<<<<<<< HEAD
      func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.destination is MapViewController{
             let NextSegue = segue.destination as! MapViewController
@@ -82,6 +200,16 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             }
 
     }
+=======
+    
+    
+
+>>>>>>> 528b07ce488c679c8839b60aeb862f3f9c3efaef
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+>>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
     }
     
        

@@ -11,6 +11,9 @@ class Business: NSObject {
     let ratingImageURL: URL?
     let reviewCount: NSNumber?
     
+    var lat : Double?
+    var lon : Double?
+    
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
         
@@ -19,7 +22,10 @@ class Business: NSObject {
             imageURL = URL(string: imageURLString!)!
         } else {
             imageURL = nil
+<<<<<<< HEAD
             //imageURL.sd_setImage(with: url, placeholderImage: "ErrorImage.jpg");
+=======
+>>>>>>> 7c77b2ec99743a60cd07a7dce21df6efbd455d45
 
         }
         
@@ -37,6 +43,10 @@ class Business: NSObject {
                     address += ", "
                 }
                 address += neighborhoods![0] as! String
+            }
+            if let coordinate = location!["coordinate"] as? [String : Double] {
+                lat = coordinate["latitude"]
+                lon = coordinate["longitude"]
             }
         }
         self.address = address
