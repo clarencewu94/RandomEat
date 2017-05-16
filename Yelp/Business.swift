@@ -25,6 +25,11 @@ class Business: NSObject {
             imageURL = URL(string: imageURLString!)!
         } else {
             imageURL = nil
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7d824611f8c264d793d361bd2cb20726a457fb31
         }
         
         let location = dictionary["location"] as? NSDictionary

@@ -12,6 +12,12 @@ import CoreLocation
 
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CategoryViewControllerDelegate {
     
+<<<<<<< HEAD
+=======
+ 
+    var businesses: [Business]!
+    var nameToBusiness  = [String : Business] ()
+>>>>>>> 7d824611f8c264d793d361bd2cb20726a457fb31
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -34,11 +40,17 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: BusinessCell)
-        
+        self.tableView.backgroundColor = UIColor.clear
+
         tableView.delegate = self
         tableView.dataSource = self
+<<<<<<< HEAD
         
         self.mapView.delegate = self
+=======
+        self.tableView.delegate = self
+        mapView.delegate = self
+>>>>>>> 7d824611f8c264d793d361bd2cb20726a457fb31
 
         
         Business.searchWithTerm(term: "Restaurants", completion: { (businesses: [Business]?, error: Error?) -> Void in
@@ -56,6 +68,9 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             
         }
         )
+    }
+     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
     }
     
     func reloadListAndMapViews() {
@@ -101,7 +116,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil{
             //return businesses!.count
-            return 1
+            return 3
         }else{
             return 0
         }
@@ -117,7 +132,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         //print (currentName)
         //print (currentAddress)
         return cell;
+    
     }
+   
+ 
     
     
     @IBAction func mapButtonClicked(_ sender: UIButton) {
@@ -157,6 +175,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
 //        }
 //        sender.title = sender.title == "List" ? "Map" : "List"
 //    }
+<<<<<<< HEAD
 //    
 //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 //        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "loc")
@@ -173,6 +192,40 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
 //        self.performSegue(withIdentifier: "showDetailSegue", sender: view)
 //    }
     
+=======
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "loc")
+        
+        annotationView.canShowCallout = true
+        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        
+        // annotationView.image = UIImage(named: "phone.png")
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        self.performSegue(withIdentifier: "showDetailSegue", sender: view)
+    }
+     func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.destination is MapViewController{
+            let NextSegue = segue.destination as! MapViewController
+            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
+                //let yelpRan = Int(arc4random_uniform(20) + 0)
+                let yelpRan = Int(arc4random_uniform(UInt32(businesses.count)))
+                cell.business = businesses[yelpRan]
+                let currentName = cell.business.name!
+                let currentAddress = cell.business.address!
+                print (currentName)
+                print (currentAddress)
+                return cell;
+            }
+
+    }
+    }
+>>>>>>> 7d824611f8c264d793d361bd2cb20726a457fb31
     
 
     
@@ -181,7 +234,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if segue.destination is UINavigationController {
             let navigationController = segue.destination as! UINavigationController
@@ -209,6 +263,5 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         //Business.searchWithTerm(term: "Restaurants", sort: nil, categories: categories, deals: nil, completion: ([Business]?, Error?) -> Void)
     }
-    
-    
-}
+    }
+
